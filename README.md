@@ -27,23 +27,30 @@ Designed for the **ESP32-C3 SuperMini**, this device utilizes Deep Sleep and ada
 
 ## 🔌 Wiring Guide
 
-The system uses a "carrier board" design on perfboard to hold the components securely.
+```mermaid
+graph TD
+    %% Define Styles
+    classDef power fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef sensor fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef mcu fill:#bfb,stroke:#333,stroke-width:2px;
 
-### 1. Power Circuit (TP4056)
-* **Battery Red** -> TP4056 `B+`
-* **Battery Black** -> TP4056 `B-`
-* **TP4056 `OUT+`** -> ESP32 `5V` pin (The SuperMini regulates this down to 3.3V)
-* **TP4056 `OUT-`** -> ESP32 `GND` pin
+    %% Components
+    Battery(LiPo Battery 3.7V):::power
+    Charger(TP4056 Module):::power
+    ESP(ESP32-C3 SuperMini):::mcu
+    BME(BME280 Sensor):::sensor
 
-### 2. Sensor Connections (BME280)
-| BME280 Pin | ESP32-C3 SuperMini Pin |
-| :--- | :--- |
-| **VCC** | 3.3V (Output from ESP32) |
-| **GND** | GND |
-| **SDA** | GPIO 0 |
-| **SCL** | GPIO 1 |
+    %% Wiring Connections
+    Battery -- Red Wire --> Charger_B_Plus[TP4056 B+]
+    Battery -- Black Wire --> Charger_B_Minus[TP4056 B-]
+    
+    Charger_Out_Plus[TP4056 OUT+] -- 5V --> ESP_5V[ESP32 5V Pin]
+    Charger_Out_Minus[TP4056 OUT-] -- GND --> ESP_GND[ESP32 GND]
 
-> **Note:** The onboard LED (GPIO 8) and Boot Button (GPIO 9) on the ESP32 are used for status and factory reset controls.
+    ESP_3V3[ESP32 3.3V] -- Power --> BME_VCC[BME280 VCC]
+    ESP_GND -- Ground --> BME_GND[BME280 GND]
+    ESP_0[ESP32 GPIO 0] -- SDA --> BME_SDA[BME280 SDA]
+    ESP_1[ESP32 GPIO 1] -- SCL --> BME_SCL[BME280 SCL]
 
 ## 💻 Installation & Flashing
 
