@@ -1,12 +1,10 @@
-# 🌡️ ESP32-C3 Matter & Thread Sleepy Sensor
+# 🌡️ ESP32-C3 Matter & Thread Sensor
 
 ![License](https://img.shields.io/badge/license-MIT-green) ![Matter](https://img.shields.io/badge/Protocol-Matter-blue) ![Platform](https://img.shields.io/badge/Platform-ESP32-orange)
 
 A high-efficiency, battery-powered environmental sensor (Temperature, Humidity, Pressure) that runs on the Matter protocol over Thread. 
 
-Designed for the **ESP32-C3 SuperMini**, this device utilizes Deep Sleep and adaptive reporting to maximize battery life. It features a custom 3D-printed enclosure and a rechargeable 1000mAh LiPo battery via a USB-C TP4056 module.
-
-![Internal Electronics](images/internal_wiring.jpg)
+Designed for the **ESP32-C6 SuperMini**, this device utilizes Deep Sleep and adaptive reporting to maximize battery life. It features a custom 3D-printed enclosure and a rechargeable 1000mAh LiPo battery via a USB-C TP4056 module.
 
 ## ✨ Features
 * **Matter over Wi-Fi/Thread Support:** Natively integrates with Apple Home, Google Home, Alexa, and Home Assistant.
@@ -24,34 +22,6 @@ Designed for the **ESP32-C3 SuperMini**, this device utilizes Deep Sleep and ada
 * **Power:** * MakerHawk 3.7V 1000mAh LiPo Battery.
   * TP4056 USB-C Charging Module (with protection).
 * **Case:** Custom 3D Printed Enclosure (STLs in `/3d_files`).
-
-## 🔌 Wiring Guide
-
-```mermaid
-graph TD
-    %% Define Styles
-    classDef power fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef sensor fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef mcu fill:#bfb,stroke:#333,stroke-width:2px;
-
-    %% Components
-    Battery(LiPo Battery 3.7V):::power
-    Charger(TP4056 Module):::power
-    ESP(ESP32-C3 SuperMini):::mcu
-    BME(BME280 Sensor):::sensor
-
-    %% Wiring Connections
-    Battery -- Red Wire --> Charger_B_Plus[TP4056 B+]
-    Battery -- Black Wire --> Charger_B_Minus[TP4056 B-]
-    
-    Charger_Out_Plus[TP4056 OUT+] -- 5V --> ESP_5V[ESP32 5V Pin]
-    Charger_Out_Minus[TP4056 OUT-] -- GND --> ESP_GND[ESP32 GND]
-
-    ESP_3V3[ESP32 3.3V] -- Power --> BME_VCC[BME280 VCC]
-    ESP_GND -- Ground --> BME_GND[BME280 GND]
-    ESP_0[ESP32 GPIO 0] -- SDA --> BME_SDA[BME280 SDA]
-    ESP_1[ESP32 GPIO 1] -- SCL --> BME_SCL[BME280 SCL]
-```
 
 ## 💻 Installation & Flashing
 
@@ -77,8 +47,6 @@ Connect the ESP32 directly via its USB port (or the TP4056 if data lines are con
 STLs are located in the `3d_files` directory. 
 * **Material:** PLA or PETG
 * **Infill:** 15%
-
-![Battery Installation](images/battery_installation.jpg)
 
 ## 📜 License
 MIT License.
