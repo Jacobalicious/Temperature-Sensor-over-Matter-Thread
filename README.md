@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-green) ![Matter](https://img.shields.io/badge/Protocol-Matter-blue) ![Platform](https://img.shields.io/badge/Platform-ESP32-orange)
 
-A high-efficiency, battery-powered environmental sensor (Temperature, Humidity, Pressure) that runs on the Matter protocol over Thread. 
+A high-efficiency, battery-powered environmental sensor (Temperature, Humidity, Pressure) that runs on the Matter protocol over Thread. Should last 1.5+ years and is rechargable!
 
 Designed for the **ESP32-C6 SuperMini**, this device utilizes Deep Sleep and adaptive reporting to maximize battery life. It features a custom 3D-printed enclosure and a rechargeable 1000mAh LiPo battery via a USB-C TP4056 module.
 
@@ -44,9 +44,8 @@ Connect the ESP32 directly via its USB port (or the TP4056 if data lines are con
 * **Factory Reset:** If you change networks, unplug the device, plug it back in, and hold the **Boot Button** for 3 seconds while the LED is **Green** (first 10 seconds of boot).
 
 ## 📂 3D Printing
-STLs are located in the `3d_files` directory. 
+STLs are provided
 * **Material:** PLA or PETG
-* **Infill:** 15%
 
 ## 📜 License
 MIT License.
