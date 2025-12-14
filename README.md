@@ -1,2 +1,76 @@
-# Temperature-Sensor-over-Matter-Thread
-A smart Temperature/Humidity/Pressure Sensor that sends it over Matter and Thread, 1.5+ Year battery life and rechargeable 
+# 🌡️ ESP32-C3 Matter & Thread Sleepy Sensor
+
+![License](https://img.shields.io/badge/license-MIT-green) ![Matter](https://img.shields.io/badge/Protocol-Matter-blue) ![Platform](https://img.shields.io/badge/Platform-ESP32-orange)
+
+A high-efficiency, battery-powered environmental sensor (Temperature, Humidity, Pressure) that runs on the Matter protocol over Thread. 
+
+Designed for the **ESP32-C3 SuperMini**, this device utilizes Deep Sleep and adaptive reporting to maximize battery life. It features a custom 3D-printed enclosure and a rechargeable 1000mAh LiPo battery via a USB-C TP4056 module.
+
+![Internal Electronics](images/internal_wiring.jpg)
+
+## ✨ Features
+* **Matter over Wi-Fi/Thread Support:** Natively integrates with Apple Home, Google Home, Alexa, and Home Assistant.
+* **Deep Sleep Logic:** The device sleeps 99% of the time, checking sensors every 15 minutes.
+* **Adaptive Reporting:** Only connects to radio if:
+    * Temperature changes by > 0.8°C
+    * Humidity changes by > 3%
+    * Pressure changes by > 2hPa
+    * Or 24 hours have passed (Heartbeat)
+* **Rechargeable:** Integrated TP4056 charging circuit with USB-C.
+
+## 🛠️ Hardware Required
+* **Microcontroller:** ESP32-C3 SuperMini.
+* **Sensor:** GY-BME280 (I2C).
+* **Power:** * MakerHawk 3.7V 1000mAh LiPo Battery.
+  * TP4056 USB-C Charging Module (with protection).
+* **Case:** Custom 3D Printed Enclosure (STLs in `/3d_files`).
+
+## 🔌 Wiring Guide
+
+The system uses a "carrier board" design on perfboard to hold the components securely.
+
+### 1. Power Circuit (TP4056)
+* **Battery Red** -> TP4056 `B+`
+* **Battery Black** -> TP4056 `B-`
+* **TP4056 `OUT+`** -> ESP32 `5V` pin (The SuperMini regulates this down to 3.3V)
+* **TP4056 `OUT-`** -> ESP32 `GND` pin
+
+### 2. Sensor Connections (BME280)
+| BME280 Pin | ESP32-C3 SuperMini Pin |
+| :--- | :--- |
+| **VCC** | 3.3V (Output from ESP32) |
+| **GND** | GND |
+| **SDA** | GPIO 0 |
+| **SCL** | GPIO 1 |
+
+> **Note:** The onboard LED (GPIO 8) and Boot Button (GPIO 9) on the ESP32 are used for status and factory reset controls.
+
+## 💻 Installation & Flashing
+
+### 1. Arduino IDE Setup
+1.  Install ESP32 Board Manager (v2.0.11+).
+2.  Install the **"Matter"** library (Espressif).
+3.  Install **Adafruit BME280** library.
+
+### 2. Critical Settings
+You **must** change the partition scheme or the upload will fail.
+* **Board:** ESP32C3 Dev Module
+* **USB CDC On Boot:** Enabled
+* **Partition Scheme:** `Huge App (3MB No OTA/1MB SPIFFS)`
+
+### 3. Flash
+Connect the ESP32 directly via its USB port (or the TP4056 if data lines are connected, though direct ESP32 connection is recommended for flashing) and upload `src/MatterSensor.ino`.
+
+## 🚦 Usage & Factory Reset
+* **Pairing:** On first boot, the LED turns **Solid Blue**. You have 5 minutes to pair using the Matter QR code printed in the Serial Monitor.
+* **Factory Reset:** If you change networks, unplug the device, plug it back in, and hold the **Boot Button** for 3 seconds while the LED is **Green** (first 10 seconds of boot).
+
+## 📂 3D Printing
+STLs are located in the `3d_files` directory. 
+* **Material:** PLA or PETG
+* **Infill:** 15%
+
+![Battery Installation](images/battery_installation.jpg)
+
+## 📜 License
+MIT License.
