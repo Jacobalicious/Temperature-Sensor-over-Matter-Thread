@@ -51,6 +51,7 @@ graph TD
     ESP_GND -- Ground --> BME_GND[BME280 GND]
     ESP_0[ESP32 GPIO 0] -- SDA --> BME_SDA[BME280 SDA]
     ESP_1[ESP32 GPIO 1] -- SCL --> BME_SCL[BME280 SCL]
+```
 
 ## 💻 Installation & Flashing
 
