@@ -1,4 +1,4 @@
-# 🌡️ ESP32-C3 Matter & Thread Sensor
+# 🌡️ ESP32-C6 Matter & Thread Sensor
 
 ![License](https://img.shields.io/badge/license-MIT-green) ![Matter](https://img.shields.io/badge/Protocol-Matter-blue) ![Platform](https://img.shields.io/badge/Platform-ESP32-orange)
 
@@ -17,7 +17,7 @@ Designed for the **ESP32-C6 SuperMini**, this device utilizes Deep Sleep and ada
 * **Rechargeable:** Integrated TP4056 charging circuit with USB-C.
 
 ## 🛠️ Hardware Required
-* **Microcontroller:** ESP32-C3 SuperMini.
+* **Microcontroller:** ESP32-C6 SuperMini.
 * **Sensor:** GY-BME280 (I2C).
 * **Power:** * MakerHawk 3.7V 1000mAh LiPo Battery.
   * TP4056 USB-C Charging Module (with protection).
@@ -26,13 +26,14 @@ Designed for the **ESP32-C6 SuperMini**, this device utilizes Deep Sleep and ada
 ## 💻 Installation & Flashing
 
 ### 1. Arduino IDE Setup
-1.  Install ESP32 Board Manager (v2.0.11+).
-2.  Install the **"Matter"** library (Espressif).
-3.  Install **Adafruit BME280** library.
+1.  File -> Preferences -> Additional boards manager URLs:
+**https://espressif.github.io/arduino-esp32/package_esp32_index.json**
+2.  Board Manager -> **esp32** -> esp32 by Espressif Systems -> install
+3.  Library Manager -> **Adafruit BME280** -> install
 
 ### 2. Critical Settings
 You **must** change the partition scheme or the upload will fail.
-* **Board:** ESP32C3 Dev Module
+* **Board:** ESP32C6 Dev Module
 * **USB CDC On Boot:** Enabled
 * **Partition Scheme:** `Huge App (3MB No OTA/1MB SPIFFS)`
 
